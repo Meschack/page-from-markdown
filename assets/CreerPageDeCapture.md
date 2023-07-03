@@ -16,11 +16,17 @@ Une **page de capture** est une page web spécialement conçue pour capturer l'a
 
 ### Les différents rôles d'une page de capture
 
-- _Captiver l'attention_ : Une page de capture efficace est conçue pour attirer instantanément l'attention des visiteurs et les inciter à en savoir plus. Elle utilise des éléments **visuels accrocheurs**, des **titres percutants** et des **messages convaincants** pour susciter l'intérêt du prospect.
+| _Captiver l'attention_                                                                                                                                                                                                                                                            |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Une page de capture efficace est conçue pour attirer instantanément l'attention des visiteurs et les inciter à en savoir plus. Elle utilise des éléments **visuels accrocheurs**, des **titres percutants** et des **messages convaincants** pour susciter l'intérêt du prospect. |
 
-- _Collecter des informations de contact_ : Le principal objectif d'une page de capture est de collecter les coordonnées des visiteurs. Cela permet de construire une liste de prospects qualifiés et de continuer à les engager dans le cadre de votre stratégie de marketing.
+| _Collecter des informations de contact_                                                                                                                                                                                             |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Le principal objectif d'une page de capture est de collecter les coordonnées des visiteurs. Cela permet de construire une liste de prospects qualifiés et de continuer à les engager dans le cadre de votre stratégie de marketing. |
 
-- _Générer des conversions_ : Une page de capture bien conçue est optimisée pour convertir les visiteurs en prospects. Elle offre une valeur irrésistible à travers une offre attrayante, telle qu'un _e-book gratuit_, une _vidéo exclusive ou un webinar_, en échange des informations de contact du prospect.
+| _Générer des conversions_                                                                                                                                                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Une page de capture bien conçue est optimisée pour convertir les visiteurs en prospects. Elle offre une valeur irrésistible à travers une offre attrayante, telle qu'un _e-book gratuit_, une _vidéo exclusive ou un webinar_, en échange des informations de contact du prospect. |
 
 Si vous souhaitez développer votre activité professionnelle afin d'attirer plus de clients et générer plus de conversions,une page de capture peut vous être utile de plusieurs façons détaillées ci-dessous. ⬇️⬇️
 
