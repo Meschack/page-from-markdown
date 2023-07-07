@@ -114,6 +114,8 @@ Voici les dictionnaires de données pour chacune des tables sous la forme de tab
 
 La justification de ces acteurs et cas d'utilisation est basée sur les besoins fonctionnels du système. L'acteur **_Agent_** est essentiel car c'est l'utilisateur principal qui interagit avec le système pour gérer ses propres demandes. L'acteur **_Administrateur_** est important pour la gestion globale du processus de demande de congé et d'absence. Les cas d'utilisation couvrent les fonctionnalités clés attendues, telles que la soumission des demandes, le suivi de l'état, la gestion des demandes par l'administrateur, la génération de rapports et la visualisation des statistiques.
 
+![](../images/DiagrammeDeCasDUtilisation.jpg)
+
 ## Liste des tâches
 
 ### Mise en place des APIs
