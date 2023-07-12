@@ -8,13 +8,12 @@ Chaque agent a un solde de congé qui augmente de 30 jours chaque année et qui 
 
 > Ça veut dire que si un agent prend du service le 01/01/2021, il ne pourra pas prendre de congés avant le 01/01/2022. Date à laquelle son solde de congés passera à 30 et il pourra prendre des congés s'il le souhaite. Le 01/01/2023, son solde sera de 30 jours plus son solde restant en 2022.
 
-Il y a trois types de congés : les congés administratifs, les congés de paternité et les congés de maternité.
+Il y a quatre types de demande : les congés administratifs, les congés de paternité, les congés de maternité et les absences.
 
 - Les congés administratifs sont déductibles du solde de congé de l'agent
 - Les congés de paternité sont de trois jours et ne sont pas déductibles du solde de congé
 - Les congés de maternité sont de quatorze semaine (soit 6 semaines avant le jour prévu pour l'accouchement et 8 semaines après celui ci) et ne sont pas déductibles du solde de congé
-
-Concernant les absences, elles sont déductibles du solde de congé de l'agent.
+- Les sont déductibles du solde de congé de l'agent.
 
 À noter qu'un agent, quelque soit son solde, n'a droit qu'à 90 jours de congés au maximum dans une année.
 
@@ -40,53 +39,69 @@ Concernant les fonctionnalités à inclure dans l'application, il y a entre autr
 
 ## Dictionnaire de données
 
-Voici les dictionnaires de données pour chacune des tables sous la forme de tableaux :
+Voici la représentation sous forme de tableau de chaque table de la base de données, avec les colonnes attributs, type, taille et description :
 
-### Table _Agent_
+**Agent**
 
-| Champ              | Type de données | Longueur | Description                              |
-| ------------------ | --------------- | -------- | ---------------------------------------- |
-| **id** 🔑          | Integer         |          | Identifiant unique de l'agent            |
-| **nom**            | Varchar         | 255      | Nom de l'agent                           |
-| **prenom**         | Varchar         | 255      | Prénom de l'agent                        |
-| **corps_fonction** | Varchar         | 255      | Corps/fonction de l'agent                |
-| **structure**      | Varchar         | 255      | Structure à laquelle l'agent est affilié |
+| Attribut                       | Type    | Taille | Description                                               |
+| ------------------------------ | ------- | ------ | --------------------------------------------------------- |
+| id                             | INT     |        | Clé primaire, identifiant unique de l'agent               |
+| nom                            | VARCHAR | (255)  | Nom de l'agent                                            |
+| prenoms                        | VARCHAR | (255)  | Prénoms de l'agent                                        |
+| matricule                      | VARCHAR | (50)   | Matricule de l'agent                                      |
+| fonction                       | VARCHAR | (255)  | Fonction de l'agent                                       |
+| corps                          | VARCHAR | (255)  | Corps de l'agent                                          |
+| id_structure                   | INT     |        | Clé étrangère vers la table Structure                     |
+| date_prise_service             | DATE    |        | Date de prise de service de l'agent                       |
+| solde_annee_actuelle           | INT     |        | Solde de congé pour l'année en cours de l'agent           |
+| cumul_solde_annees_anterieures | INT     |        | Cumul du solde de congé des années précédentes de l'agent |
+| email                          | VARCHAR | (80)   | Email pour la connexion de l'agent                        |
+| password                       | VARCHAR | (255)  | Mot de passe pour la connexion de l'agent                 |
 
-### Table _Service_
+**Structure**
 
-| Champ           | Type de données | Longueur | Description                   |
-| --------------- | --------------- | -------- | ----------------------------- |
-| **id** 🔑       | Integer         |          | Identifiant unique du service |
-| **nom_service** | Varchar         | 255      | Nom du service                |
+| Attribut     | Type    | Taille | Description                                         |
+| ------------ | ------- | ------ | --------------------------------------------------- |
+| id           | INT     |        | Clé primaire, identifiant unique de la structure    |
+| sigle        | VARCHAR | (10)   | Sigle de la structure                               |
+| denomination | VARCHAR | (255)  | Dénomination de la structure                        |
+| id_directeur | INT     |        | Clé étrangère vers la table Agent (id du directeur) |
 
-### Table _Conge_
+**Demande**
 
-| Champ         | Type de données | Longueur | Description                 |
-| ------------- | --------------- | -------- | --------------------------- |
-| **id** 🔑     | Integer         |          | Identifiant unique du congé |
-| **nom_conge** | Varchar         | 255      | Nom du congé                |
+| Attribut     | Type    | Taille | Description                                        |
+| ------------ | ------- | ------ | -------------------------------------------------- |
+| id           | INT     |        | Clé primaire, identifiant unique de la demande     |
+| id_agent     | INT     |        | Clé étrangère vers la table Agent                  |
+| id_typeconge | INT     |        | Clé étrangère vers la table TypeDemande            |
+| date_debut   | DATE    |        | Date de début de la demande                        |
+| date_fin     | DATE    |        | Date de fin de la demande                          |
+| statut       | VARCHAR | (50)   | Statut de la demande (pending, accepted, rejected) |
 
-### Table _DemandeConge_
+**TypeDemande**
 
-| Champ           | Type de données | Longueur | Description                                      |
-| --------------- | --------------- | -------- | ------------------------------------------------ |
-| **id** 🔑       | Integer         |          | Identifiant unique de la demande de congé        |
-| **id_agent** 🗝️ | Integer         |          | Identifiant de l'agent lié à la demande de congé |
-| **date_depart** | Date            |          | Date de départ de la demande de congé            |
-| **duree**       | Integer         |          | Durée de la demande de congé en jours            |
-| **statut**      | Varchar         | 255      | Statut de la demande de congé                    |
+| Attribut | Type    | Taille | Description                                         |
+| -------- | ------- | ------ | --------------------------------------------------- |
+| id       | INT     |        | Clé primaire, identifiant unique du type de demande |
+| libelle  | VARCHAR | (255)  | Libellé du type de demande                          |
 
-### Table _DemandeAbsence_
+**NoteDeService**
 
-| Champ            | Type de données | Longueur | Description                                       |
-| ---------------- | --------------- | -------- | ------------------------------------------------- |
-| **id** 🔑        | Integer         |          | Identifiant unique de la demande d'absence        |
-| **id_agent** 🗝️  | Integer         |          | Identifiant de l'agent lié à la demande d'absence |
-| **date_depart**  | Date            |          | Date de départ de la demande d'absence            |
-| **duree**        | Integer         |          | Durée de la demande d'absence en jours            |
-| **raison**       | Varchar         | 255      | Raison de l'absence                               |
-| **justificatif** | Varchar         | 255      | Chemin vers le justificatif de l'absence          |
-| **statut**       | Varchar         | 255      | Statut de la demande d'absence                    |
+| Attribut  | Type      | Taille | Description                              |
+| --------- | --------- | ------ | ---------------------------------------- |
+| id        | INT       |        | Clé primaire                             |
+| periode   | DateRange | (255)  | Période concernée par la note de service |
+| reference | VARCHAR   | (255)  | Référence de la note de service          |
+| chemin    | VARCHAR   | (255)  | Chemin vers le document                  |
+
+**TitreDeConge**
+
+| Attribut  | Type    | Taille | Description                           |
+| --------- | ------- | ------ | ------------------------------------- |
+| id        | INT     |        | Clé primaire                          |
+| annee     | INT     |        | Année concernée par le titre de congé |
+| reference | VARCHAR | (255)  | Référence du titre de congé           |
+| chemin    | VARCHAR | (255)  | Chemin vers le document               |
 
 ## Modélisation
 
@@ -96,7 +111,9 @@ Voici les dictionnaires de données pour chacune des tables sous la forme de tab
 
 - **Agent** : L'agent est l'utilisateur principal du système. Il est responsable de la gestion de ses propres demandes de congé et d'absence. Cet acteur interagit avec le système pour effectuer des demandes, suivre leur statut et consulter son historique de demandes.
 
-- **Administrateur** : L'administrateur est un utilisateur ayant des privilèges supplémentaires par rapport aux agents. Il est responsable de la gestion globale des demandes de congé et d'absence. Cet acteur interagit avec le système pour gérer les demandes, les approuver ou les rejeter, générer des rapports et visualiser les statistiques.
+- **Directeur** : Le directeur est un agent ayant des privilèges supplémentaires par rapport aux simples agents. Il est responsable de la gestion des demandes de congé et d'absence dans le service qu'il dirige. Cet acteur interagit avec le système pour gérer les demandes, les approuver ou les rejeter.
+
+- **Manager des ressources humaines** : Le manager des ressources humaines est également un agent avec des privilèges supplémentaires par rapport aux agents simples. Il est responsable de la génération des différents documents : la note de service concernant les demandes accordées sur une période donnée ainsi que le titre de congé au début de chaque année.
 
 #### Cas d'utilisation
 
@@ -106,74 +123,93 @@ Voici les dictionnaires de données pour chacune des tables sous la forme de tab
 
 - **Consulter l'historique des demandes** : Permet à un agent de consulter l'historique de ses demandes de congé et d'absence précédentes. Cela permet à l'agent de vérifier les congés accordés précédemment et de faire référence à ses demandes passées.
 
-- **Gérer les demandes de congé (administrateur)** : Permet à l'administrateur de gérer les demandes de congé soumises par les agents. Cela comprend la visualisation de toutes les demandes, l'approbation ou le rejet des demandes, ainsi que la mise à jour du statut des demandes.
+- **Gérer les demandes de congé (directeur)** : Permet à l'administrateur de gérer les demandes de congé soumises par les agents. Cela comprend la visualisation de toutes les demandes, l'approbation ou le rejet des demandes, ainsi que la mise à jour du statut des demandes.
 
-- **Générer un rapport de demande de congé accordée (administrateur)** : Permet à l'administrateur de générer un rapport récapitulatif des demandes de congé approuvées. Ce rapport peut inclure des informations telles que les dates, les durées, les types de congé et les informations sur l'agent concerné.
+- **Générer une note de service de demandes de congé accordées (manager des ressources humaines)** : Permet à l'administrateur de générer un rapport récapitulatif des demandes de congé approuvées. Ce rapport peut inclure des informations telles que les dates, les durées, les types de congé et les informations sur l'agent concerné.
 
-- **Visualiser les statistiques des demandes par service (administrateur)** : Permet à l'administrateur de visualiser les statistiques globales des demandes de congé et d'absence par service. Cela peut inclure le nombre de demandes par service, les types de congé les plus courants, etc.
-
-La justification de ces acteurs et cas d'utilisation est basée sur les besoins fonctionnels du système. L'acteur **_Agent_** est essentiel car c'est l'utilisateur principal qui interagit avec le système pour gérer ses propres demandes. L'acteur **_Administrateur_** est important pour la gestion globale du processus de demande de congé et d'absence. Les cas d'utilisation couvrent les fonctionnalités clés attendues, telles que la soumission des demandes, le suivi de l'état, la gestion des demandes par l'administrateur, la génération de rapports et la visualisation des statistiques.
+- **Générer les titres de congé (manager des ressources humaines)** : Permet à l'administrateur de visualiser les statistiques globales des demandes de congé et d'absence par service. Cela peut inclure le nombre de demandes par service, les types de congé les plus courants, etc.
 
 ![](../images/DiagrammeDeCasDUtilisation.jpg)
+
+### Diagramme de classes
 
 ## Liste des tâches
 
 ### Mise en place des APIs
 
-**Catégorie : Authentification et Autorisation**
+Liste logique et chronologique des APIs à mettre en place dans le cadre de l'application :
 
-- Mettre en place le système d'authentification pour les agents et l'administrateur
-- Configurer les rôles et les permissions pour les différents utilisateurs
-- Implémenter les middlewares pour vérifier les autorisations d'accès aux routes
+1. **Authentification et gestion des utilisateurs**
 
-**Catégorie : Gestion des demandes de congé**
+   | Method | URI          | Nom de la route | Action                           |
+   | ------ | ------------ | --------------- | -------------------------------- |
+   | POST   | api/register | register        | UserController@register          |
+   | POST   | api/login    | login           | UserController@login             |
+   | POST   | api/logout   | logout          | UserController@logout            |
+   | GET    | api/user     | user            | UserController@getCurrentUser    |
+   | PUT    | api/user     | user.update     | UserController@updateCurrentUser |
+   | DELETE | api/user     | user.destroy    | UserController@deleteCurrentUser |
 
-- Créer les routes pour la gestion des demandes de congé (CRUD)
-- Mettre en place les contrôleurs et les services correspondants
-- Implémenter les fonctionnalités de création, lecture, mise à jour et suppression des demandes de congé
-- Valider les demandes en fonction des règles spécifiées (date d'ouverture du droit au congé, solde, etc.)
-- Gérer le suivi de l'état des demandes (en attente, approuvée, refusée)
-- Générer les PDF récapitulatifs pour les demandes de congé approuvées
+2. **Demandes de congé et d'absence**
 
-**Catégorie : Fonctionnalités administratives**
+   | Method | URI                    | Nom de la route  | Action                    |
+   | ------ | ---------------------- | ---------------- | ------------------------- |
+   | GET    | api/demandes           | demandes.index   | DemandeController@index   |
+   | POST   | api/demandes           | demandes.store   | DemandeController@store   |
+   | GET    | api/demandes/{demande} | demandes.show    | DemandeController@show    |
+   | PUT    | api/demandes/{demande} | demandes.update  | DemandeController@update  |
+   | DELETE | api/demandes/{demande} | demandes.destroy | DemandeController@destroy |
 
-- Créer les routes pour les fonctionnalités administratives (génération de rapports, statistiques, etc.)
-- Mettre en place les contrôleurs et les services correspondants
-- Implémenter les fonctionnalités d'accès aux données statistiques (demandes accordées par service, etc.)
-- Gérer les fonctionnalités d'approbation ou de rejet des demandes de congé par l'administrateur
+3. **Génération de documents**
 
----
+   | Method | URI                          | Nom de la route          | Action                                   |
+   | ------ | ---------------------------- | ------------------------ | ---------------------------------------- |
+   | POST   | api/generate-note-de-service | generate.note-de-service | DocumentController@generateNoteDeService |
+   | POST   | api/generate-titre-de-conge  | generate.titre-de-conge  | DocumentController@generateTitreDeConge  |
 
-**Gestion des agents :**
+## Fonctionnalités principales de l'application
 
-- Créer un modèle "Agent" avec les attributs appropriés.
+- Création d'une demande de congé ou d'absence
+- Gestion des demandes
+- Génération de documents
+- Gestion des utilisateurs
 
-**Gestion des services :**
+## Interactions entre les utilisateurs et le système
 
-- Créer un modèle "Service" avec les attributs appropriés.
+- S'inscrire / se connecter au système
+- Faire une demande de congé ou d'absence
+- Suivre sa demande
+- Consulter les rapports générés (notes de service, titre de congé)
 
-**Gestion des types de congé :**
+- Consulter la liste des demandes
+- Gérer (accepter / rejeter) les demandes de congé ou d'absence
+- Administrer les utilisateurs
 
-- Créer un modèle "Congé" avec les attributs appropriés.
+- Générer une note de service
+- Générer un titre de congé
 
-**Gestion des demandes de congé :**
+## Informations nécessaires à collecter et à afficher
 
-- Créer un modèle "DemandeCongé" avec les attributs appropriés.
-- Mettre en place les API pour la création, la récupération et la mise à jour des demandes de congé.
-- Implémenter la logique de gestion des demandes de congé (validation des dates, contraintes de solde, etc.).
-- Implémenter les fonctionnalités de suivi de l'état des demandes de congé et de consultation de l'historique des demandes.
+- Concernant la création d'une demande
 
-**Gestion des demandes par l'administrateur :**
+  Pour créer, l'agent authentifié doit entrer :
 
-- Mettre en place les API pour la gestion des demandes de congé par l'administrateur (approbation, refus, mise à jour du statut).
-- Implémenter les fonctionnalités de génération de PDF récapitulatif des demandes de congé approuvées.
+  - le type de la demande qu'il souhaite créer
+  - la date de début et la date de fin (dans le cas d'une demande de congé de paternité ou de maternité, la date de fin est automatiquement calculée et remplie par le système puisqu'un congé de paternité ne peut durer que 3 jours maximum et un congé de maternité, 14 semaines)
+  - les preuves sous forme de document PDF / Image dans le cadre d'un congé de paternité ou de maternité.
 
-**Gestion des statistiques et des rapports :**
+- Concernant la création de compte, l'utilisateur doit entrer son nom, son prénom, son matricule, la structure dans laquelle il est agent, son corps de métier, sa fonction, la date à laquelle il a pris du service, un email et un mot de passe.
 
-- Mettre en place les API pour la récupération des demandes de congé et d'absence accordées par service.
-- Implémenter les fonctionnalités de visualisation des statistiques globales des demandes par service.
+- Pour la connexion à son compte, l'agent doit entrer son email et son mot de passe.
 
-**Authentification et autorisation :**
+## Autorisations et les rôles des utilisateurs
 
-- Mettre en place l'authentification basée sur un jeton (token-based authentication) pour sécuriser les API.
-- Mettre en place les rôles d'accès (agent, administrateur) pour gérer les autorisations sur les différentes fonctionnalités.
+- Rôles
+
+Il y a trois rôles dans l'application : **_le rôle d'agent, le rôle de directeur et le rôle de manager des ressources humaines_**.
+
+Concernant les autorisations, les agents peuvent créer et suivre des demandes mais également consulter les documents qui ont été générés comme les notes de service et les titres de congé.
+
+Les directeurs peuvent accéder à la liste des agents de leur service et à celle concernant les demandes des agents de leur service. Ils peuvent également gérer (supprimer) les comptes des agents de leur service.
+
+Les managers des ressources humaines peuvent générer les documents (notes de service, titre de congé).
