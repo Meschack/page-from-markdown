@@ -1,4 +1,4 @@
-# Description
+# Description du projet de création d'une application de gestion des demandes de congés et absences pour le compte du Ministère du Développement et de la Coordination de l'action gouvernementale
 
 Le projet porte sur une application de gestion des congés administratifs et des demandes d'absence dans le ministère du plan et du développement.
 
@@ -25,6 +25,37 @@ Concernant les fonctionnalités à inclure dans l'application, il y a entre autr
 - la gestion (accord / refus) des demandes de congé ou d'absence par l'administrateur
 - une génération d'une note de service récapitulant les informations des demandes accordées sur une période donnée
 - une génération d'un titre de congé récapitulant les informations et les soldes de congé des agents d'un service donné
+
+## Modélisation
+
+### Cas d'utilisation
+
+#### Acteurs
+
+- **Agent** : L'agent est l'utilisateur principal du système. Il est responsable de la gestion de ses propres demandes de congé et d'absence. Cet acteur interagit avec le système pour effectuer des demandes, suivre leur statut et consulter son historique de demandes.
+
+- **Directeur** : Le directeur est un agent ayant des privilèges supplémentaires par rapport aux simples agents. Il est responsable de la gestion des demandes de congé et d'absence dans le service qu'il dirige. Cet acteur interagit avec le système pour gérer les demandes, les approuver ou les rejeter.
+
+- **Manager des ressources humaines** : Le manager des ressources humaines est également un agent avec des privilèges supplémentaires par rapport aux agents simples. Il est responsable de la génération des différents documents : la note de service concernant les demandes accordées sur une période donnée ainsi que le titre de congé au début de chaque année.
+
+#### Cas d'utilisation
+
+- **Faire une demande de congé** : Permet à un agent de soumettre une demande de congé, en fournissant les informations nécessaires telles que la date de départ, la durée, le type de congé, etc. Cette fonctionnalité permet à l'agent de demander un congé ou une absence.
+
+- **Suivre l'état d'une demande** : Permet à un agent de suivre l'état de ses demandes de congé et d'absence, en vérifiant si elles sont en attente, approuvées ou rejetées. Cela permet à l'agent de connaître l'avancement de ses demandes et de planifier en conséquence.
+
+- **Consulter l'historique des demandes** : Permet à un agent de consulter l'historique de ses demandes de congé et d'absence précédentes. Cela permet à l'agent de vérifier les congés accordés précédemment et de faire référence à ses demandes passées.
+
+- **Gérer les demandes de congé (directeur)** : Permet à l'administrateur de gérer les demandes de congé soumises par les agents. Cela comprend la visualisation de toutes les demandes, l'approbation ou le rejet des demandes, ainsi que la mise à jour du statut des demandes.
+
+- **Générer une note de service de demandes de congé accordées (manager des ressources humaines)** : Permet à l'administrateur de générer un rapport récapitulatif des demandes de congé approuvées. Ce rapport peut inclure des informations telles que les dates, les durées, les types de congé et les informations sur l'agent concerné.
+
+- **Générer les titres de congé (manager des ressources humaines)** : Permet à l'administrateur de visualiser les statistiques globales des demandes de congé et d'absence par service. Cela peut inclure le nombre de demandes par service, les types de congé les plus courants, etc.
+
+![](../images/DiagrammeDeCasDUtilisation.jpg)
+
+### Diagramme de classes
+
 
 ## Dictionnaire de données
 
@@ -92,35 +123,6 @@ Voici la représentation sous forme de tableau de chaque table de la base de don
 | reference | VARCHAR | (255)  | Référence du titre de congé           |
 | chemin    | VARCHAR | (255)  | Chemin vers le document               |
 
-## Modélisation
-
-### Cas d'utilisation
-
-#### Acteurs
-
-- **Agent** : L'agent est l'utilisateur principal du système. Il est responsable de la gestion de ses propres demandes de congé et d'absence. Cet acteur interagit avec le système pour effectuer des demandes, suivre leur statut et consulter son historique de demandes.
-
-- **Directeur** : Le directeur est un agent ayant des privilèges supplémentaires par rapport aux simples agents. Il est responsable de la gestion des demandes de congé et d'absence dans le service qu'il dirige. Cet acteur interagit avec le système pour gérer les demandes, les approuver ou les rejeter.
-
-- **Manager des ressources humaines** : Le manager des ressources humaines est également un agent avec des privilèges supplémentaires par rapport aux agents simples. Il est responsable de la génération des différents documents : la note de service concernant les demandes accordées sur une période donnée ainsi que le titre de congé au début de chaque année.
-
-#### Cas d'utilisation
-
-- **Faire une demande de congé** : Permet à un agent de soumettre une demande de congé, en fournissant les informations nécessaires telles que la date de départ, la durée, le type de congé, etc. Cette fonctionnalité permet à l'agent de demander un congé ou une absence.
-
-- **Suivre l'état d'une demande** : Permet à un agent de suivre l'état de ses demandes de congé et d'absence, en vérifiant si elles sont en attente, approuvées ou rejetées. Cela permet à l'agent de connaître l'avancement de ses demandes et de planifier en conséquence.
-
-- **Consulter l'historique des demandes** : Permet à un agent de consulter l'historique de ses demandes de congé et d'absence précédentes. Cela permet à l'agent de vérifier les congés accordés précédemment et de faire référence à ses demandes passées.
-
-- **Gérer les demandes de congé (directeur)** : Permet à l'administrateur de gérer les demandes de congé soumises par les agents. Cela comprend la visualisation de toutes les demandes, l'approbation ou le rejet des demandes, ainsi que la mise à jour du statut des demandes.
-
-- **Générer une note de service de demandes de congé accordées (manager des ressources humaines)** : Permet à l'administrateur de générer un rapport récapitulatif des demandes de congé approuvées. Ce rapport peut inclure des informations telles que les dates, les durées, les types de congé et les informations sur l'agent concerné.
-
-- **Générer les titres de congé (manager des ressources humaines)** : Permet à l'administrateur de visualiser les statistiques globales des demandes de congé et d'absence par service. Cela peut inclure le nombre de demandes par service, les types de congé les plus courants, etc.
-
-![](../images/DiagrammeDeCasDUtilisation.jpg)
-
-### Diagramme de classes
 
 ## Liste des tâches
 
