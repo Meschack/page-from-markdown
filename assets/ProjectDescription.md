@@ -15,18 +15,7 @@ Il y a quatre types de demande : les congés administratifs, les congés de pate
 - Les congés de maternité sont de quatorze semaine (soit 6 semaines avant le jour prévu pour l'accouchement et 8 semaines après celui ci) et ne sont pas déductibles du solde de congé
 - Les sont déductibles du solde de congé de l'agent.
 
-À noter qu'un agent, quelque soit son solde, n'a droit qu'à 90 jours de congés au maximum dans une année.
-
-Informations recueillies lors d'une demande de congé :
-
-- Nom et Prénom de l'agent
-- Corps / fonction de l'agent
-- Structure de l'agent
-- Le type de congé
-- La date de départ
-- La durée en jours du congé
-
-À noter qu'un agent ne peut pas faire de demande de congé avant sa date d'ouverture du droit au congé (un an après sa prise de fonction)
+À noter qu'un agent, quelque soit son solde, n'a droit qu'à 90 jours de congés au maximum dans une année et qu'il ne peut pas faire de demande de congé avant sa date d'ouverture du droit au congé (un an après sa prise de fonction)
 
 Concernant les fonctionnalités à inclure dans l'application, il y a entre autres :
 
@@ -34,8 +23,8 @@ Concernant les fonctionnalités à inclure dans l'application, il y a entre autr
 - le suivi de sa demande par un agent
 - une consultation de son historique de demande
 - la gestion (accord / refus) des demandes de congé ou d'absence par l'administrateur
-- une génération d'un PDF récapitulant les informations d'une demande accordée
-- une visualisation de l'ensemble des demandes congés et d'absence accordés par service
+- une génération d'une note de service récapitulant les informations des demandes accordées sur une période donnée
+- une génération d'un titre de congé récapitulant les informations et les soldes de congé des agents d'un service donné
 
 ## Dictionnaire de données
 
