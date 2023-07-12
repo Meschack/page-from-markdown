@@ -40,7 +40,7 @@ Concernant les fonctionnalités à inclure dans l'application, il y a entre autr
 
 #### Cas d'utilisation
 
-- **Faire une demande de congé** : Permet à un agent de soumettre une demande de congé, en fournissant les informations nécessaires telles que la date de départ, la durée, le type de congé, etc. Cette fonctionnalité permet à l'agent de demander un congé ou une absence.
+- **Faire une demande** : Permet à un agent de soumettre une demande de congé, en fournissant les informations nécessaires telles que la date de départ, la durée, le type de congé, etc. Cette fonctionnalité permet à l'agent de demander un congé ou une absence.
 
 - **Suivre l'état d'une demande** : Permet à un agent de suivre l'état de ses demandes de congé et d'absence, en vérifiant si elles sont en attente, approuvées ou rejetées. Cela permet à l'agent de connaître l'avancement de ses demandes et de planifier en conséquence.
 
